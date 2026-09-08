@@ -1,0 +1,13 @@
+ Seg  Source File                           Pings   Beams (potential)
+----------------------------------------------------------------------
+  0   20240614_194448_2.txt                   620             634,880
+  1   20240614_200001_3.txt                   413             422,912
+  2   20240614_200947_4.txt                 1,489           1,524,736
+  3   20240614_201828_5.txt                 1,564           1,601,536
+  4   20240614_202551_6.txt                   338             346,112
+
+Total pings: 4,424
+Total potential soundings: 4,530,176 (many will be fill/invalid)
+
+Segment 0: 620 pings × 1024 beams = 634,880 sounding slots
+Valid soundings: 218,451 / 634,880 (34.4%)

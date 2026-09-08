@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{hyperref}
+
+% Document info
+\title{\textbf{Final Project Proposal}\\[0.4em]
+       \large Resolving Distortions from Iceberg Motion in Multibeam Echosounder Data }
+\author{Marcel Rodriguez-Riccelli}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Overview}
+
+ Mass loss from the terrestrial cryosphere exports freshwater from ice sheets into the ocean by a phenomenon known as freshening. Freshening has the effect of altering thermohaline circulation, which in turn has a profound impact on global climate patterns. Atmospheric and oceanic warming has increased freshwater flux from ice sheets into ocean basins steadily over the past few decades, with projections indicating continued acceleration. The primary drivers of mass loss from ice sheets are iceberg calving, ocean-driven submarine melt, and surface runoff. Of these, estimates of the contribution and effects of iceberg meltwater on glacial fjords and ocean basins are particularly poorly constrained. In glacial fjords, iceberg melt serves as a significant sink for heat of oceanic water, and influences local circulation and oceanic forcing of glaciers. As icebergs migrate into the open ocean, they release and distribute freshwater at a higher rate into increasingly remote waters. Modeling iceberg trajectories and melt is essential to modeling both ice-sheet ocean feedbacks in glacial fjords and the effects of freshening on ocean circulation.
+ 
+ Existing estimates of iceberg melt rates depend on poorly constrained melt parameterization methods. Recently, approaches have been developed to measure iceberg melt directly by repeatedly mapping icebergs and estimating volumetric change. The majority of an iceberg's volume is submerged, and these regions are particularly subject to ocean-driven melt and wave erosion. Acoustic sensors are well suited to mapping submarine iceberg geometry, albeit with significant limitations that remain to be addressed. The rotational and translational motion of icebergs requires implementation of Simultaneous Localization and Mapping (SLAM) techniques to compensate. Multibeam sonar devices obtain measurements by emitting one-dimensional arcs of range measurements as they move, accumulating them into a map of the surveyed surface. However, because spatial coverage is achieved through forward motion, consecutive pings share minimal or no overlap, complicating the feature matching that SLAM depends on.
+
+The goal of this project is to process and render multibeam echosounder scans obtained within a glacial fjord, characterize the nature of motion-induced distortions present in the data, and propose methods for improved iceberg mapping. The data were gathered across several deployments in the LeConte Bay glacial fjord of an uncrewed surface vessel equipped with a NORBIT Winghead multibeam echosounder, along with complementary sound velocity, position, and orientation data.
+
+\section*{Project Plan}
+\begin{itemize}
+    \item Load raw multibeam echosounder data in HYPACK and apply sound velocity and motion corrections
+    \item Export corrected data as a point cloud and import into CloudCompare for visualization and further processing
+    \item Identify and classify distortions attributable to iceberg motion
+    \item Perform quantitative and qualitative analyses of the nature and extent of these distortions
+    \item Suggest methods for removing / solving for distortion and iceberg motion
+\end{itemize}
+
+\section*{Resources Needed}
+\begin{itemize}
+    \item HYPACK
+    \item Cloud Compare
+    \item Python
+\end{itemize}
+
+\section*{Timeline}
+\begin{tabular}{ll}
+    Week 1 & Meet with research group to receive raw data and relevant field notes \\
+    Week 2 & Load data into HYPACK, apply corrections, and export as a point cloud \\
+    Week 3 & Import point cloud into CloudCompare for classification and analysis \\
+    Week 4 & Generate figures and complete written analysis \\
+\end{tabular}
+
+\end{document}

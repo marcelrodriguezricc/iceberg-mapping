@@ -1,0 +1,12 @@
+numpy
+pandas
+matplotlib
+scipy
+xarray
+pyproj
+open3d
+jupyterlab
+netCDF4
+contextily
+geopandas
+folium

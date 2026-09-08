@@ -1,0 +1,7 @@
+# Data / working directories
+cloud-compare/
+qimera/
+data/
+
+# Large video files (kept locally, not tracked)
+docs/process-notes/*.mov
