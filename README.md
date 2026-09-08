@@ -4,7 +4,7 @@
 ![MATLAB](https://img.shields.io/badge/MATLAB-R2026a-0076A8?logo=mathworks&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-This repository contains the scripts necessary to reproduce the point cloud data products that map the surface of an iceberg derived from raw multibeam sonar soundings. The iceberg, dubbed Spireberg, calved from the LeConte Glacier in June of 2024. Surveys were conducted by the Ice Ocean Interactions Observatory at Oregon State University College's for Ocean, Earth, and Atmospheric Sciences, using a NORBIT Winghead Multibeam Echosounder deployed from a robotic uncrewed surface vessel.
+This repository contains the scripts necessary to reproduce the point cloud data products, which model the surface of an iceberg derived from raw multibeam sonar soundings. The iceberg, dubbed Spireberg, calved from LeConte Glacier, Alaska in June of 2024 during a research cruise. Surveys were conducted by the Ice Ocean Interactions Observatory at Oregon State University College's for Ocean, Earth, and Atmospheric Sciences, using a NORBIT Winghead Multibeam Echosounder deployed from a robotic uncrewed surface vessel named Polly. Complimentary data of the water column and local micro-scale hydrodyanmics gathered by other sensors on Polly and Meltstake platform (see [J. D. Nash et al., "Turbulent Dynamics of Buoyant Melt Plumes Adjacent Near-Vertical Glacier Ice," Geophysical Research Letters, vol. 51, no. 9, e2024GL108790, 2024.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024GL108790)) were also used in the correction and registration process.
 
 ## Process
 
