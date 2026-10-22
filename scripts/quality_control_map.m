@@ -1,8 +1,7 @@
 % ===== Global =====
 
-% Establish coordinate reference system and print to console
+% Establish coordinate reference system
 crs = projcrs(6337);
-disp(crs.Name)
 
 % Load survey day dataset
 survey = load('/Users/marcel/Desktop/iceberg-mapping/data/2024-06-17/MB_Spireberg_2024-06-17_corrected.mat');
@@ -44,8 +43,8 @@ for g = 1:numel(day.groups)
         pts = grp.passes(p).points;
 
         % Retrieve X and Y coords of all points
-        E = [E; pts.XYZ(1)]; % Easting
-        N = [N; pts.XYZ(2)]; % Northing
+        E = [E; pts.XYZ(:,1)]; % Easting
+        N = [N; pts.XYZ(:,2)]; % Northing
 
         % Plot all points and populate lat/lon arrays
         [lat, lon] = projinv(crs, pts.origXYZ(:,1), pts.origXYZ(:,2));
@@ -59,7 +58,7 @@ for g = 1:numel(day.groups)
     % Align rectangle to axes and size it to points extent along each
     [V, ~]  = eig(cov([E N])); % Generate covariance matrix and find the eigenvectors to establish principle axes
     bestAng = atan2(V(2,end), V(1,end)); % Get angle of the major eigenvector from N and E components
-    q = [cos(bestAng) sin(bestAng); -sin(bestAng) cos(bestAng)] * [Ereg.'; Nreg.']; % Rotate points into box-aligned frame
+    q = [cos(bestAng) sin(bestAng); -sin(bestAng) cos(bestAng)] * [E.'; N.']; % Rotate points into box-aligned frame
     b = [prctile(q(1,:),lo) prctile(q(1,:),hi) ...
          prctile(q(2,:),lo) prctile(q(2,:),hi)]; % Use percentile spread to find the furthest extents
     Rb = [cos(bestAng) -sin(bestAng); sin(bestAng) cos(bestAng)]; % Rotate back to map frame
@@ -122,13 +121,9 @@ for g = 1:numel(day.groups)
     allLatV = [];  allLonV = []; % Initialize lat/lon arrays
     for p = 1:nP % For each pass...
         pts = grp.passes(p).points; % Get points table
-        reg = grp.passes(p).reg; % Get table of registration transform values
-        Rp = [reg.cos -reg.sin; reg.sin reg.cos]; % Store rotation values
-        t = [reg.tx; reg.ty]; % Store linear transform values
         [~, iu] = unique(pts.DateTime); % Disregard repeated values (points in the same swath)
-        V = pts.VesselXYZ(iu, 1:2).'; % Get vessel coordinates for each swath
-        Vreg = Rp * (V + shift) + t - shift; % Apply registration transform to vessel coordinates
-        [latV, lonV] = projinv(crs, Vreg(1,:), Vreg(2,:)); % Convert to lat/lon
+        V = pts.VesselXYZ(iu, 1:2).'; % Get registered vessel coordinates for each swath (transformed in makeGroup)
+        [latV, lonV] = projinv(crs, V(1,:), V(2,:)); % Convert to lat/lon
         
         % Add to map
         geoplot(gx2, latV, lonV, 'k-', 'LineWidth', 3)

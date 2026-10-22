@@ -96,6 +96,27 @@ function group = makeGroup(passes, groupNumber, shiftX, shiftY, centX, centY)
         P(p).points.Properties.VariableDescriptions{'origXYZ'} = ...
             ['[Easting Northing Elevation], NAD83(2011)/UTM 8N + NAVD88; ' ...
              'original (pre-registration) position'];
+
+        % Apply forward transform to vessel positions for registered frame
+        % and store originals
+        V = P(p).points.VesselXYZ; % Original frame
+        Vloc = V(:,1:2).' + [shiftX; shiftY]; % Apply shift for local frame
+        Vreg = [c -s; s c] * Vloc + [tx; ty]; % Apply registration transform
+        Vreg = Vreg.' - [shiftX shiftY]; % Undo shift to get back to UTM frame
+
+        % Store original and registered vessel positions
+        P(p).points.origVesselXYZ = V;
+        P(p).points.VesselXYZ = [Vreg, V(:,3)];
+
+        % Metadata
+        P(p).points.Properties.VariableUnits{'origVesselXYZ'} = 'm';
+        P(p).points.Properties.VariableDescriptions{'origVesselXYZ'} = ...
+            ['[Easting Northing Elevation] of vessel reference point, ' ...
+            'NAD83(2011)/UTM 8N + NAVD88; original (pre-registration) position'];
+        P(p).points.Properties.VariableUnits{'VesselXYZ'} = 'm';
+        P(p).points.Properties.VariableDescriptions{'VesselXYZ'} = ...
+            ['[Easting Northing Elevation] of vessel reference point, ' ...
+            'NAD83(2011)/UTM 8N + NAVD88; registered frame'];
     end
 
     % Get rotation angle, as well as start, end, and midpoint times
